@@ -1,0 +1,1 @@
+Repo for the Snowflake user group meeting: [Deep Dive: dbt Projects on Snowflake](https://usergroups.snowflake.com/events/details/snowflake-women-on-snowflake-presents-deep-dive-dbt-projects-on-snowflake/cohost-stockholm/) 
