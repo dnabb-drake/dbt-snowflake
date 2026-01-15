@@ -1,5 +1,6 @@
 -- Loosely Follotinwg https://docs.getdbt.com/guides/snowflake
 
+-- Pick an existing role and database to use to load the data
 USE ROLE DBTDEMO_DEV;
 USE DATABASE DBTDEMO_DEV;
 
