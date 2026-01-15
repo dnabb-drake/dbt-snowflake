@@ -1,0 +1,14 @@
+# This file is only used for PRD deployment
+
+DRAKE_LH99228:
+  target: prd
+  outputs:
+    prd:
+      type: snowflake
+      account: not-used # account is not needed when running in Snowflake
+      user: not-used # user is not needed when running in Snowflake
+      role: DBTDEMO_PRODUCTION
+      database: DBTDEMO_PRD
+      schema: TRANSFORM
+      warehouse: SF_GENERIC_WH
+      threads: 16
