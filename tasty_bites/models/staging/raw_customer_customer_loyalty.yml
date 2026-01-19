@@ -1,0 +1,49 @@
+models:
+  - name: raw_customer_customer_loyalty
+    columns:
+      - name: customer_id
+        data_type: number
+        description: A unique identifier for each customer in the loyalty program.
+      - name: first_name
+        data_type: varchar
+        description: The first name of the customer.
+      - name: last_name
+        data_type: varchar
+        description: The last name or surname of the customer.
+      - name: city
+        data_type: varchar
+        description: The name of the city where the customer resides.
+      - name: country
+        data_type: varchar
+        description: The name of the country where the customer resides.
+      - name: postal_code
+        data_type: varchar
+        description: The postal code associated with the customer's address.
+      - name: preferred_language
+        data_type: varchar
+        description: The language preferred by the customer for communication and services.
+      - name: gender
+        data_type: varchar
+        description: The gender of the customer, typically represented as male, female, or other.
+      - name: favourite_brand
+        data_type: varchar
+        description: The brand that the customer prefers or has shown a preference for.
+      - name: marital_status
+        data_type: varchar
+        description: Indicates the marital status of the customer, such as single, married, divorced, etc.
+      - name: children_count
+        data_type: varchar
+        description: Represents the number of children the customer has, stored as a string.
+      - name: sign_up_date
+        data_type: date
+        description: The date when the customer signed up for the loyalty program.
+      - name: birthday_date
+        data_type: date
+        description: The date of birth of the customer, used for age verification and personalized marketing.
+      - name: e_mail
+        data_type: varchar
+        description: The email address of the customer, used for communication and promotional purposes.
+      - name: phone_number
+        data_type: varchar
+        description: The contact phone number of the customer, used for direct communication and support.
+    description: The raw_customer_customer_loyalty model represents raw data extracted from the CUSTOMER_LOYALTY table in the DBTDEMO_DEV.RAW schema. It contains detailed information about customers, including their personal details, preferences, and loyalty-related attributes. This model serves as the foundational dataset for analyzing customer demographics, behavior, and loyalty program participation.

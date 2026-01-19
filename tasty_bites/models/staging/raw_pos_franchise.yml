@@ -1,0 +1,25 @@
+models:
+  - name: raw_pos_franchise
+    columns:
+      - name: franchise_id
+        data_type: number
+        description: A unique identifier for each franchise. This is a numeric value used to distinguish franchises within the dataset.
+      - name: first_name
+        data_type: varchar
+        description: The first name of the franchise owner or representative. This is a text field containing the given name.
+      - name: last_name
+        data_type: varchar
+        description: The last name of the franchise owner or representative. This is a text field containing the family name or surname.
+      - name: city
+        data_type: varchar
+        description: The name of the city where the franchise is located.
+      - name: country
+        data_type: varchar
+        description: The name of the country where the franchise operates.
+      - name: e_mail
+        data_type: varchar
+        description: The email address associated with the franchise.
+      - name: phone_number
+        data_type: varchar
+        description: The contact number associated with the franchise, used for communication purposes.
+    description: The raw_pos_franchise model represents the raw data extracted from the FRANCHISE table in the DBTDEMO_DEV.RAW schema. It contains information about franchise entities, including their identification, contact details, and location.

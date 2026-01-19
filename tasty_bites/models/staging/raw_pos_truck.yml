@@ -1,0 +1,46 @@
+models:
+  - name: raw_pos_truck
+    columns:
+      - name: truck_id
+        data_type: number
+        description: Unique identifier for each truck in the dataset.
+      - name: menu_type_id
+        data_type: number
+        description: Identifier representing the type of menu associated with the truck.
+      - name: primary_city
+        data_type: varchar
+        description: The primary city where the truck operates.
+      - name: region
+        data_type: varchar
+        description: Represents the geographical region where the truck operates, typically a broader area within a country.
+      - name: iso_region
+        data_type: varchar
+        description: Denotes the ISO 3166-2 code for the region, providing a standardized identifier for sub-national areas.
+      - name: country
+        data_type: varchar
+        description: Indicates the country where the truck is located, represented by its name.
+      - name: iso_country_code
+        data_type: varchar
+        description: The ISO 3166-1 alpha-2 code representing the country where the truck is located.
+      - name: franchise_flag
+        data_type: number
+        description: Indicates whether the truck is part of a franchise (1 for franchise, 0 for non-franchise).
+      - name: year
+        data_type: number
+        description: The year associated with the truck, typically representing the manufacturing or model year.
+      - name: make
+        data_type: varchar
+        description: The manufacturer or brand of the truck.
+      - name: model
+        data_type: varchar
+        description: The specific model name or identifier of the truck.
+      - name: ev_flag
+        data_type: number
+        description: Indicates whether the truck is electric (1 for electric, 0 for non-electric).
+      - name: franchise_id
+        data_type: number
+        description: Unique identifier for the franchise associated with the truck.
+      - name: truck_opening_date
+        data_type: date
+        description: The date when the truck was opened for operations.
+    description: The raw_pos_truck model represents the raw data extracted from the DBTDEMO_DEV.RAW.TRUCK table. It contains detailed information about trucks, including their identification, location, franchise status, and specifications such as make, model, and whether they are electric vehicles. This model serves as the foundational dataset for further transformations and analyses related to truck operations and attributes.

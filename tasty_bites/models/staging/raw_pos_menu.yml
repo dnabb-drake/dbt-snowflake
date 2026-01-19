@@ -1,0 +1,37 @@
+models:
+  - name: raw_pos_menu
+    columns:
+      - name: menu_id
+        data_type: number
+        description: Unique identifier for each menu in the system.
+      - name: menu_type_id
+        data_type: number
+        description: Unique identifier for the type of menu, used to categorize menus.
+      - name: menu_type
+        data_type: varchar
+        description: Describes the type or category of the menu, such as breakfast, lunch, or dinner.
+      - name: truck_brand_name
+        data_type: varchar
+        description: The name of the truck brand associated with the menu.
+      - name: menu_item_id
+        data_type: number
+        description: A unique identifier for each menu item.
+      - name: menu_item_name
+        data_type: varchar
+        description: The name of the menu item being offered.
+      - name: item_category
+        data_type: varchar
+        description: Represents the high-level classification of the menu item, such as 'Beverages', 'Entrees', or 'Desserts'.
+      - name: item_subcategory
+        data_type: varchar
+        description: Provides a more specific classification within the item_category, such as 'Soft Drinks' under 'Beverages' or 'Pasta' under 'Entrees'.
+      - name: cost_of_goods_usd
+        data_type: number
+        description: Indicates the cost incurred to produce or procure the menu item, expressed in US dollars.
+      - name: sale_price_usd
+        data_type: number
+        description: The price at which the menu item is sold, represented in US dollars.
+      - name: menu_item_health_metrics_obj
+        data_type: variant
+        description: A variant object containing health-related metrics for the menu item, such as nutritional information or dietary attributes.
+    description: The raw_pos_menu model represents the raw data extracted from the MENU table in the DBTDEMO_DEV.RAW schema. It contains detailed information about menu items, including their identifiers, types, names, categories, subcategories, pricing, cost metrics, and health-related attributes. This model serves as the foundational dataset for analyzing menu-related data across different truck brands.
