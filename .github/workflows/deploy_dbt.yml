@@ -30,8 +30,8 @@ jobs:
       - name: Setup Snowflake CLI (OIDC)
         uses: Snowflake-Labs/snowflake-cli-action@v2.0
         with:
-          cli-version: "3.14"
           use-oidc: true
+          cli-version: "3.14"
 
       - name: Test connection
         run: |
