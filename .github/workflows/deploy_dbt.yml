@@ -19,7 +19,11 @@ jobs:
     name: Deploy dbt
 
     env:
-      SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+      SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}      
+      SNOWFLAKE_DATABASE: DBTDEMO_PRD
+      SNOWFLAKE_SCHEMA: PUBLIC
+      SNOWFLAKE_ROLE: DBTDEMO_PRODUCTION
+      SNOWFLAKE_WAREHOUSE: DBTDEMO_GENERIC_WH
 
     steps:
       - uses: actions/checkout@v5
@@ -44,5 +48,4 @@ jobs:
           rm -f profiles.yml
           mv profiles-prd.yml profiles.yml
 
-          snow connection test -x
           snow dbt deploy jaffle_shop -x --external-access-integration DBT_EA_INTEGRATION
