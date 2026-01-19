@@ -1,0 +1,25 @@
+models:
+  - name: raw_pos_country
+    columns:
+      - name: country_id
+        data_type: number
+        description: A unique identifier for each country, represented as a numeric value.
+      - name: country
+        data_type: varchar
+        description: The name of the country, stored as a text string.
+      - name: iso_currency
+        data_type: varchar
+        description: The ISO 4217 currency code associated with the country, represented as a text string.
+      - name: iso_country
+        data_type: varchar
+        description: The ISO 3166-1 alpha-2 code representing the country.
+      - name: city_id
+        data_type: number
+        description: A unique identifier for the city within the dataset.
+      - name: city
+        data_type: varchar
+        description: The name of the city associated with the country.
+      - name: city_population
+        data_type: varchar
+        description: Represents the population of the city. This column provides demographic data for each city listed in the dataset.
+    description: The raw_pos_country model is a representation of the raw data extracted from the COUNTRY table in the DBTDEMO_DEV.RAW schema. It contains information about countries, their associated cities, and relevant identifiers such as country_id, city_id, ISO currency codes, and population data.

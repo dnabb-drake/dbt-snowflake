@@ -1,0 +1,100 @@
+models:
+  - name: orders
+    description: The 'orders' model consolidates data from various raw tables to provide a comprehensive view of order details, including customer information, truck details, menu items, franchise details, and financial metrics. This model is designed to support analysis of order transactions and associated attributes for business insights.
+    columns:
+      - name: order_id
+        description: Unique identifier for each order placed. This column links order details with the order header.
+        data_type: number
+      - name: truck_id
+        description: Identifier for the food truck where the order was placed. This helps in tracking orders by specific trucks.
+        data_type: number
+      - name: order_ts
+        description: Timestamp indicating when the order was placed. Useful for analyzing order trends over time.
+        data_type: timestamp_ntz
+      - name: order_detail_id
+        description: Unique identifier for each order detail, representing a specific item or service within an order.
+        data_type: number
+      - name: line_number
+        description: Sequential number indicating the position of the item or service within the order details.
+        data_type: number
+      - name: truck_brand_name
+        description: Name of the brand associated with the truck fulfilling the order.
+        data_type: varchar
+      - name: menu_type
+        description: Indicates the category or type of menu offered by the truck, such as breakfast, lunch, or dinner.
+        data_type: varchar
+      - name: primary_city
+        description: Represents the main city where the truck operates or is primarily located.
+        data_type: varchar
+      - name: region
+        description: Specifies the geographical region in which the truck operates, such as North, South, East, or West.
+        data_type: varchar
+      - name: country
+        description: The country where the food truck is operating. This provides geographical context for the order.
+        data_type: varchar
+      - name: franchise_flag
+        description: Indicates whether the food truck is part of a franchise. A value of 'true' means it is a franchise, while 'false' means it is not.
+        data_type: number
+      - name: franchise_id
+        description: The unique identifier for the franchise associated with the food truck. This helps in linking the truck to its franchise details.
+        data_type: number
+      - name: franchisee_first_name
+        description: The first name of the franchisee associated with the truck where the order was placed.
+        data_type: varchar
+      - name: franchisee_last_name
+        description: The last name of the franchisee associated with the truck where the order was placed.
+        data_type: varchar
+      - name: location_id
+        description: The unique identifier for the location where the order was placed.
+        data_type: number
+      - name: customer_id
+        description: A unique identifier for the customer associated with the order. This ID is used to track customer details and loyalty information.
+        data_type: number
+      - name: first_name
+        description: The first name of the customer associated with the order. This helps in identifying the customer personally.
+        data_type: varchar
+      - name: last_name
+        description: The last name of the customer associated with the order. This complements the first name for full identification of the customer.
+        data_type: varchar
+      - name: e_mail
+        description: The email address of the customer, used for communication and identification purposes.
+        data_type: varchar
+      - name: phone_number
+        description: The contact phone number of the customer, used for communication and verification.
+        data_type: varchar
+      - name: children_count
+        description: The number of children associated with the customer, used for demographic and marketing analysis.
+        data_type: varchar
+      - name: gender
+        description: Represents the gender of the customer, typically categorized as male, female, or other.
+        data_type: varchar
+      - name: marital_status
+        description: Indicates the marital status of the customer, such as single, married, divorced, or widowed.
+        data_type: varchar
+      - name: menu_item_id
+        description: Unique identifier for the menu item ordered, used to link to specific details about the menu item.
+        data_type: number
+      - name: menu_item_name
+        description: The name of the menu item that was ordered. This provides a description of the food or beverage item selected by the customer.
+        data_type: varchar
+      - name: quantity
+        description: The number of units of the menu item ordered by the customer. This indicates the volume of the specific item purchased in the order.
+        data_type: number
+      - name: unit_price
+        description: The price per unit of the menu item. This represents the cost of a single unit of the item before any discounts or taxes are applied.
+        data_type: number
+      - name: price
+        description: The total price for a specific menu item in the order, calculated as quantity multiplied by unit price.
+        data_type: number
+      - name: order_amount
+        description: The total amount for the order before applying taxes and discounts.
+        data_type: number
+      - name: order_tax_amount
+        description: The total tax amount applied to the order.
+        data_type: varchar
+      - name: order_discount_amount
+        description: The total discount amount applied to the order, calculated based on promotions, coupons, or other discount mechanisms.
+        data_type: varchar
+      - name: order_total
+        description: The final total amount for the order after applying discounts, taxes, and other adjustments.
+        data_type: number

@@ -1,0 +1,31 @@
+models:
+  - name: raw_pos_order_detail
+    columns:
+      - name: order_detail_id
+        data_type: number
+        description: Unique identifier for each order detail record.
+      - name: order_id
+        data_type: number
+        description: Identifier linking the order detail to the corresponding order.
+      - name: menu_item_id
+        data_type: number
+        description: Identifier for the menu item associated with the order detail.
+      - name: discount_id
+        data_type: varchar
+        description: A unique identifier for the discount applied to the order item, represented as a string.
+      - name: line_number
+        data_type: number
+        description: The sequential number indicating the position of the item within the order.
+      - name: quantity
+        data_type: number
+        description: The number of units of the menu item ordered.
+      - name: unit_price
+        data_type: number
+        description: The price of a single unit of the menu item in the order.
+      - name: price
+        data_type: number
+        description: The total price for the menu item, calculated as quantity multiplied by unit_price.
+      - name: order_item_discount_amount
+        data_type: varchar
+        description: The amount of discount applied to the specific order item.
+    description: The raw_pos_order_detail model represents the raw data extracted from the ORDER_DETAIL table in the DBTDEMO_DEV.RAW schema. It contains detailed information about individual order items, including their IDs, quantities, prices, discounts, and other related attributes. This model serves as the foundational dataset for analyzing point-of-sale order details.

@@ -1,0 +1,25 @@
+models:
+  - name: raw_pos_location
+    columns:
+      - name: location_id
+        data_type: number
+        description: A unique identifier for each location, represented as a numeric value.
+      - name: placekey
+        data_type: varchar
+        description: A standardized identifier for a physical location, typically used for location-based analytics.
+      - name: location
+        data_type: varchar
+        description: The name or description of the physical location, such as a store or venue.
+      - name: city
+        data_type: varchar
+        description: The name of the city where the location is situated.
+      - name: region
+        data_type: varchar
+        description: The administrative region or state where the location is found.
+      - name: iso_country_code
+        data_type: varchar
+        description: The ISO 3166-1 alpha-2 code representing the country of the location.
+      - name: country
+        data_type: varchar
+        description: The name of the country where the location is situated.
+    description: The raw_pos_location model represents the raw data extracted from the DBTDEMO_DEV.RAW.LOCATION table. It contains information about various locations, including their unique identifiers, geographical details, and country codes. This model serves as the foundational dataset for location-based analysis and transformations.

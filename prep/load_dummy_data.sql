@@ -1,60 +1,193 @@
--- Loosely Follotinwg https://docs.getdbt.com/guides/snowflake
+-- Loosely Follotinwg https://github.com/Snowflake-Labs/getting-started-with-dbt-on-snowflake/blob/main/tasty_bytes_dbt_demo/setup/tasty_bytes_setup.sql
 
 -- Pick an existing role and database to use to load the data
-USE ROLE DBTDEMO_DEV;
+USE ROLE DBTDEMO_DEVELOPER;
 USE DATABASE DBTDEMO_DEV;
 
-create or replace schema RAW_JAFFLE;
-create or replace schema RAW_STRIPE;
+create or replace schema RAW;
 
-create or replace table raw_jaffle.customers 
-( id integer,
-  first_name varchar,
-  last_name varchar
-);
+CREATE OR REPLACE FILE FORMAT public.csv_ff 
+type = 'csv';
 
-copy into raw_jaffle.customers (id, first_name, last_name)
-from 's3://dbt-tutorial-public/jaffle_shop_customers.csv'
-file_format = (
-    type = 'CSV'
-    field_delimiter = ','
-    skip_header = 1
-    ); 
 
-create or replace table raw_jaffle.orders
-( id integer,
-  user_id integer,
-  order_date date,
-  status varchar,
-  _etl_loaded_at timestamp default current_timestamp
-);
+CREATE OR REPLACE STAGE public.s3load
+COMMENT = 'Quickstarts S3 Stage Connection'
+url = 's3://sfquickstarts/frostbyte_tastybytes/'
+file_format = public.csv_ff;
 
-copy into raw_jaffle.orders (id, user_id, order_date, status)
-from 's3://dbt-tutorial-public/jaffle_shop_orders.csv'
-file_format = (
-    type = 'CSV'
-    field_delimiter = ','
-    skip_header = 1
-    );
+/*--
+ raw zone table build 
+--*/
 
-create or replace table raw_stripe.payment 
-( id integer,
-  orderid integer,
-  paymentmethod varchar,
-  status varchar,
-  amount integer,
-  created date,
-  _batched_at timestamp default current_timestamp
-);
+-- country table build
+CREATE OR REPLACE TABLE raw.country
+(
+    country_id NUMBER(18,0),
+    country VARCHAR(16777216),
+    iso_currency VARCHAR(3),
+    iso_country VARCHAR(2),
+    city_id NUMBER(19,0),
+    city VARCHAR(16777216),
+    city_population VARCHAR(16777216)
+) 
+COMMENT = '{"origin":"sf_sit-is", "name":"tasty-bytes-dbt", "version":{"major":1, "minor":0}, "attributes":{"is_quickstart":1, "source":"sql"}}';
 
-copy into raw_stripe.payment (id, orderid, paymentmethod, status, amount, created)
-from 's3://dbt-tutorial-public/stripe_payments.csv'
-file_format = (
-    type = 'CSV'
-    field_delimiter = ','
-    skip_header = 1
-    );
+-- franchise table build
+CREATE OR REPLACE TABLE raw.franchise 
+(
+    franchise_id NUMBER(38,0),
+    first_name VARCHAR(16777216),
+    last_name VARCHAR(16777216),
+    city VARCHAR(16777216),
+    country VARCHAR(16777216),
+    e_mail VARCHAR(16777216),
+    phone_number VARCHAR(16777216) 
+)
+COMMENT = '{"origin":"sf_sit-is", "name":"tasty-bytes-dbt", "version":{"major":1, "minor":0}, "attributes":{"is_quickstart":1, "source":"sql"}}';
 
-select * from raw_jaffle.customers;
-select * from raw_jaffle.orders;
-select * from raw_stripe.payment;   
+-- location table build
+CREATE OR REPLACE TABLE raw.location
+(
+    location_id NUMBER(19,0),
+    placekey VARCHAR(16777216),
+    location VARCHAR(16777216),
+    city VARCHAR(16777216),
+    region VARCHAR(16777216),
+    iso_country_code VARCHAR(16777216),
+    country VARCHAR(16777216)
+)
+COMMENT = '{"origin":"sf_sit-is", "name":"tasty-bytes-dbt", "version":{"major":1, "minor":0}, "attributes":{"is_quickstart":1, "source":"sql"}}';
+
+-- menu table build
+CREATE OR REPLACE TABLE raw.menu
+(
+    menu_id NUMBER(19,0),
+    menu_type_id NUMBER(38,0),
+    menu_type VARCHAR(16777216),
+    truck_brand_name VARCHAR(16777216),
+    menu_item_id NUMBER(38,0),
+    menu_item_name VARCHAR(16777216),
+    item_category VARCHAR(16777216),
+    item_subcategory VARCHAR(16777216),
+    cost_of_goods_usd NUMBER(38,4),
+    sale_price_usd NUMBER(38,4),
+    menu_item_health_metrics_obj VARIANT
+)
+COMMENT = '{"origin":"sf_sit-is", "name":"tasty-bytes-dbt", "version":{"major":1, "minor":0}, "attributes":{"is_quickstart":1, "source":"sql"}}';
+
+-- truck table build 
+CREATE OR REPLACE TABLE raw.truck
+(
+    truck_id NUMBER(38,0),
+    menu_type_id NUMBER(38,0),
+    primary_city VARCHAR(16777216),
+    region VARCHAR(16777216),
+    iso_region VARCHAR(16777216),
+    country VARCHAR(16777216),
+    iso_country_code VARCHAR(16777216),
+    franchise_flag NUMBER(38,0),
+    year NUMBER(38,0),
+    make VARCHAR(16777216),
+    model VARCHAR(16777216),
+    ev_flag NUMBER(38,0),
+    franchise_id NUMBER(38,0),
+    truck_opening_date DATE
+)
+COMMENT = '{"origin":"sf_sit-is", "name":"tasty-bytes-dbt", "version":{"major":1, "minor":0}, "attributes":{"is_quickstart":1, "source":"sql"}}';
+
+-- order_header table build
+CREATE OR REPLACE TABLE raw.order_header
+(
+    order_id NUMBER(38,0),
+    truck_id NUMBER(38,0),
+    location_id FLOAT,
+    customer_id NUMBER(38,0),
+    discount_id VARCHAR(16777216),
+    shift_id NUMBER(38,0),
+    shift_start_time TIME(9),
+    shift_end_time TIME(9),
+    order_channel VARCHAR(16777216),
+    order_ts TIMESTAMP_NTZ(9),
+    served_ts VARCHAR(16777216),
+    order_currency VARCHAR(3),
+    order_amount NUMBER(38,4),
+    order_tax_amount VARCHAR(16777216),
+    order_discount_amount VARCHAR(16777216),
+    order_total NUMBER(38,4)
+)
+COMMENT = '{"origin":"sf_sit-is", "name":"tasty-bytes-dbt", "version":{"major":1, "minor":0}, "attributes":{"is_quickstart":1, "source":"sql"}}';
+
+-- order_detail table build
+CREATE OR REPLACE TABLE raw.order_detail 
+(
+    order_detail_id NUMBER(38,0),
+    order_id NUMBER(38,0),
+    menu_item_id NUMBER(38,0),
+    discount_id VARCHAR(16777216),
+    line_number NUMBER(38,0),
+    quantity NUMBER(5,0),
+    unit_price NUMBER(38,4),
+    price NUMBER(38,4),
+    order_item_discount_amount VARCHAR(16777216)
+)
+COMMENT = '{"origin":"sf_sit-is", "name":"tasty-bytes-dbt", "version":{"major":1, "minor":0}, "attributes":{"is_quickstart":1, "source":"sql"}}';
+
+-- customer loyalty table build
+CREATE OR REPLACE TABLE raw.customer_loyalty
+(
+    customer_id NUMBER(38,0),
+    first_name VARCHAR(16777216),
+    last_name VARCHAR(16777216),
+    city VARCHAR(16777216),
+    country VARCHAR(16777216),
+    postal_code VARCHAR(16777216),
+    preferred_language VARCHAR(16777216),
+    gender VARCHAR(16777216),
+    favourite_brand VARCHAR(16777216),
+    marital_status VARCHAR(16777216),
+    children_count VARCHAR(16777216),
+    sign_up_date DATE,
+    birthday_date DATE,
+    e_mail VARCHAR(16777216),
+    phone_number VARCHAR(16777216)
+)
+COMMENT = '{"origin":"sf_sit-is", "name":"tasty-bytes-dbt", "version":{"major":1, "minor":0}, "attributes":{"is_quickstart":1, "source":"sql"}}';
+
+/*--
+ raw zone table load 
+--*/
+
+-- country table load
+COPY INTO raw.country
+FROM @public.s3load/raw_pos/country/;
+
+-- franchise table load
+COPY INTO raw.franchise
+FROM @public.s3load/raw_pos/franchise/;
+
+-- location table load
+COPY INTO raw.location
+FROM @public.s3load/raw_pos/location/;
+
+-- menu table load
+COPY INTO raw.menu
+FROM @public.s3load/raw_pos/menu/;
+
+-- truck table load
+COPY INTO raw.truck
+FROM @public.s3load/raw_pos/truck/;
+
+-- customer_loyalty table load
+COPY INTO raw.customer_loyalty
+FROM @public.s3load/raw_customer/customer_loyalty/;
+
+-- order_header table load
+COPY INTO raw.order_header
+FROM @public.s3load/raw_pos/order_header/;
+
+-- order_detail table load
+COPY INTO raw.order_detail
+FROM @public.s3load/raw_pos/order_detail/;
+
+-- setup completion note
+SELECT 'tasty_bytes_dbt_db setup is now complete' AS note;

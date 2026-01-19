@@ -1,1 +1,3 @@
-Repo for the Snowflake user group meeting: [Deep Dive: dbt Projects on Snowflake](https://usergroups.snowflake.com/events/details/snowflake-women-on-snowflake-presents-deep-dive-dbt-projects-on-snowflake/cohost-stockholm/) 
+Repo for the Snowflake user group meeting: [Deep Dive: dbt Projects on Snowflake](https://usergroups.snowflake.com/events/details/snowflake-women-on-snowflake-presents-deep-dive-dbt-projects-on-snowflake/cohost-stockholm/).  
+
+Loosely based on [Snowflake-Labs/getting-started-with-dbt-on-snowflake: Provides a getting started dbt project for dbt on Snowflake](https://github.com/Snowflake-Labs/getting-started-with-dbt-on-snowflake)

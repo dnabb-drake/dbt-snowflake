@@ -9,6 +9,6 @@ DRAKE_LH99228:
       user: not-used # user is not needed when running in Snowflake
       role: DBTDEMO_PRODUCTION
       database: DBTDEMO_PRD
-      schema: TRANSFORM
+      schema: TRANSFORM # this needs to exist when deploying dbt Projects in Snowflake
       warehouse: DBTDEMO_GENERIC_WH
       threads: 16

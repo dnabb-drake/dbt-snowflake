@@ -6,7 +6,7 @@ on:
       - PRD
     paths:
       - ".github/workflows/deploy_dbt.yml"
-      - "jaffle_shop/**"
+      - "tasty_bites/**"
 
 permissions:
   id-token: write # Required for GitHub OIDC token generation
@@ -43,9 +43,9 @@ jobs:
 
       - name: Deploy dbt project
         run: |
-          cd jaffle_shop
+          cd tasty_bites
 
           rm -f profiles.yml
           mv profiles-prd.yml profiles.yml
 
-          snow dbt deploy jaffle_shop -x --external-access-integration DBT_EA_INTEGRATION
+          snow dbt deploy tasty_bites -x --external-access-integration DBT_EA_INTEGRATION

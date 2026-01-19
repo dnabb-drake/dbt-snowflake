@@ -1,0 +1,52 @@
+models:
+  - name: raw_pos_order_header
+    description: The raw_pos_order_header model extracts all columns from the ORDER_HEADER table in the RAW schema of the DBTDEMO_DEV database. This model serves as the foundational layer for processing and analyzing order header data from the point-of-sale system.
+    columns:
+      - name: order_id
+        data_type: number
+        description: Unique identifier for each order in the system.
+      - name: truck_id
+        data_type: number
+        description: Identifier for the truck associated with the order.
+      - name: location_id
+        data_type: float
+        description: Identifier for the location where the order was placed or fulfilled.
+      - name: customer_id
+        data_type: number
+        description: Unique identifier for the customer associated with the order.
+      - name: discount_id
+        data_type: varchar
+        description: Identifier for the discount applied to the order, if any.
+      - name: shift_id
+        data_type: number
+        description: Unique identifier for the shift during which the order was placed.
+      - name: shift_start_time
+        data_type: time
+        description: The time when the shift begins, recorded in the time format.
+      - name: shift_end_time
+        data_type: time
+        description: The time when the shift ends, recorded in the time format.
+      - name: order_channel
+        data_type: varchar
+        description: The channel through which the order was placed, such as online, in-store, or mobile.
+      - name: order_ts
+        data_type: timestamp_ntz
+        description: The timestamp indicating when the order was placed.
+      - name: served_ts
+        data_type: varchar
+        description: The timestamp or string indicating when the order was served.
+      - name: order_currency
+        data_type: varchar
+        description: The currency in which the order transaction was made.
+      - name: order_amount
+        data_type: number
+        description: The total amount of the order before applying taxes and discounts.
+      - name: order_tax_amount
+        data_type: varchar
+        description: The amount of tax applied to the order.
+      - name: order_discount_amount
+        data_type: varchar
+        description: The total discount amount applied to the order.
+      - name: order_total
+        data_type: number
+        description: The total amount for the order after applying discounts and taxes, represented as a numeric value.
