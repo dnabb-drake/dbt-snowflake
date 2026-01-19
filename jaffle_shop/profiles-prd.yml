@@ -10,5 +10,5 @@ DRAKE_LH99228:
       role: DBTDEMO_PRODUCTION
       database: DBTDEMO_PRD
       schema: TRANSFORM
-      warehouse: SF_GENERIC_WH
+      warehouse: DBTDEMO_GENERIC_WH
       threads: 16
