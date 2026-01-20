@@ -1,0 +1,15 @@
+# make a copy of this file to create your own profiles.yml
+DRAKE_LH99228:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake # must always be "snowflake"
+      account: dummy # always needed, but it only needs to be correct for local development
+      user: dummy # always needed, but it only needs to be correct for local development
+      role: DBTDEMO_DEVELOPER
+      database: DBTDEMO_DEV
+      schema: DAAB # this schema is just for you, so it's a good idea to use your initials
+      warehouse: DBTDEMO_GENERIC_WH
+      authenticator: externalbrowser
+      reuse_connections: true
+      threads: 4
